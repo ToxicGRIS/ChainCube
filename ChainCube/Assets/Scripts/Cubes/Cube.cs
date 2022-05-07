@@ -17,7 +17,7 @@ public class Cube : MonoBehaviour
 	private Material materialComponent;
 	private Rigidbody rigidbodyComponent;
 
-	[SerializeField] public int Number 
+	public int Number 
 	{ 
 		get => number;
 		set
@@ -27,6 +27,8 @@ public class Cube : MonoBehaviour
 			UpdateVisuals();
 		}
 	}
+
+	public CubesKit Kit => kit;
 
 	#endregion
 	#region Start
@@ -56,6 +58,8 @@ public class Cube : MonoBehaviour
 			transform.position = (transform.position + otherCubePosition) / 2;
 			rigidbodyComponent.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
 			Number++;
+			Score.AddScoreInvoke(kit[Number].Number);
+			if (Number == kit.Lenght - 1) GameState.WinInvoke();
 		}
 	}
 

@@ -11,7 +11,6 @@ public class CubesKit : ScriptableObject
     { 
         get 
         {
-            //i = Mathf.Clamp(0, presets.Length - 1, i);
             return presets[i]; 
         } 
     }

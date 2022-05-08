@@ -1018,7 +1018,7 @@ MonoBehaviour:
   - {fileID: 3381392850712480541}
   - {fileID: 2443271733523869217}
   kit: {fileID: 11400000, guid: 6045bbb7d46b74f49a690140f5716e61, type: 2}
-  jumpForce: 10
+  jumpForce: 5
 --- !u!1 &9117407352065996929
 GameObject:
   m_ObjectHideFlags: 0

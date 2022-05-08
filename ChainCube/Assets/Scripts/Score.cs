@@ -122,7 +122,6 @@ public class Score : MonoBehaviour
 	private void GameOver()
 	{
 		isPlaying = false;
-		GameState.GameOverInvoke();
 	}
 
 	public void StartPlay()
@@ -130,6 +129,11 @@ public class Score : MonoBehaviour
 		isPlaying = true;
 		isPaused = false;
 		CurrentScore = 0;
+		currentCube = null;
+		foreach (var c in FindObjectsOfType<Cube>())
+		{
+			Destroy(c.gameObject);
+		}
 		SpawnCube();
 		input.Gameplay.Enable();
 	}

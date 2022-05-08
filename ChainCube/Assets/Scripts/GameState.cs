@@ -10,6 +10,7 @@ public class GameState : MonoBehaviour
 	[SerializeField] private GameObject GameScreen;
 	[SerializeField] private GameObject PauseScreen;
 	[SerializeField] private Score score;
+	[SerializeField] private GameObject gameOverText;
 
 	private static event Action win;
 	private static event Action gameOver;
@@ -78,6 +79,7 @@ public class GameState : MonoBehaviour
 	private void Start()
 	{
 		input.Menu.Pause.performed += e => SwitchPause();
+		GameOverSubscribe(GameOver);
 	}
 
 	private void OnEnable()
@@ -112,22 +114,33 @@ public class GameState : MonoBehaviour
 		isOver = false;
 		PauseScreen.SetActive(false);
 		GameScreen.SetActive(true);
+		gameOverText.SetActive(false);
 	}
 
 	public void SwitchPause()
 	{
-		if (isPaused)
+		if (!isOver)
 		{
-			PauseScreen.SetActive(false);
-			GameScreen.SetActive(true);
-			isPaused = false;
+			if (isPaused)
+			{
+				PauseScreen.SetActive(false);
+				GameScreen.SetActive(true);
+				isPaused = false;
+			}
+			else
+			{
+				PauseScreen.SetActive(true);
+				GameScreen.SetActive(false);
+				isPaused = true;
+			}
+			score.SwitchPause();
 		}
-		else
-		{
-			PauseScreen.SetActive(true);
-			GameScreen.SetActive(false);
-			isPaused = true;
-		}
-		score.SwitchPause();
+	}
+
+	public void GameOver()
+	{
+		SwitchPause();
+		isOver = true;
+		gameOverText.SetActive(true);
 	}
 }

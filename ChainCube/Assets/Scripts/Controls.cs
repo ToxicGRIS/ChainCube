@@ -110,7 +110,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""110df502-6c23-4449-962e-46139f6d91c0"",
-                    ""path"": ""<Touchscreen>/primaryTouch/indirectTouch"",
+                    ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Smartphone"",
@@ -132,7 +132,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1a92ce88-0ceb-4baa-8b24-4c3f06c2a6fc"",
-                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""path"": ""<Touchscreen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Smartphone"",
@@ -154,7 +154,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d0f3c1e9-5af9-4cdb-8ffe-ccb0d8a24670"",
-                    ""path"": ""<Touchscreen>/primaryTouch/indirectTouch"",
+                    ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Smartphone"",
@@ -215,7 +215,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""97da923c-7ee0-45cc-ac46-1be2d4d63a56"",
-                    ""path"": ""*/{Back}"",
+                    ""path"": ""*/{Cancel}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Smartphone"",

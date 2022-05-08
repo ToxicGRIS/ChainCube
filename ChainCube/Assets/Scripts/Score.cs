@@ -11,15 +11,15 @@ public class Score : MonoBehaviour
 	[Header("Properties")]
 	[SerializeField] private static int currentScore;
 	[SerializeField] private bool isPlaying;
-	//[SerializeField] private float maxThrowPositionDelta;
+	[SerializeField] private float maxThrowPositionDelta;
 	[SerializeField] [Range(0, 1000)] private float throwingForce;
 	[SerializeField] private AnimationCurve chanceOfCube;
-	//[SerializeField] [Min(1)] private int amountOfThrowsForAd;
+	[SerializeField] [Min(1)] private int amountOfThrowsForAd;
 	[Header("Components")]
 	[SerializeField] private Camera mainCamera;
 	[SerializeField] private GameObject cubePrefab;
 	[SerializeField] private TextMeshProUGUI scoreText;
-	//[SerializeField] private AdMob adMob;
+	[SerializeField] private AdMob adMob;
 
 	private Controls input;
 	private bool isGrabbing;
@@ -103,12 +103,12 @@ public class Score : MonoBehaviour
 			isGrabbing = false;
 			currentRigitbody.constraints = RigidbodyConstraints.None;
 			currentRigitbody.AddForce(Vector3.forward * throwingForce, ForceMode.VelocityChange);
-			/*throwsAmount++;
+			throwsAmount++;
 			if (throwsAmount >= amountOfThrowsForAd)
 			{
-				adMob.ShowAd();
+				//adMob.ShowAd();
 				throwsAmount = 0;
-			}*/
+			}
 		}
 	}
 

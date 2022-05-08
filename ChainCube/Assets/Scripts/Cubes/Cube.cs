@@ -6,9 +6,11 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Cube : MonoBehaviour
 {
+	
 	#region Properties
 
 	[SerializeField][Min(0)] private int number;
+	[SerializeField][Range(0, 29)] private int winNumber = 29;
 	[SerializeField] private TextMeshPro[] texts;
 	[SerializeField] private CubesKit kit;
 	[SerializeField] [Range(0, 1000)] float jumpForce;
@@ -22,7 +24,7 @@ public class Cube : MonoBehaviour
 		get => number;
 		set
 		{
-			if (value < 0 || value >= kit.Lenght) throw new System.Exception("Number is out of range.");
+			if (value < 0) value = 0;
 			number = value;
 			UpdateVisuals();
 		}
@@ -58,17 +60,29 @@ public class Cube : MonoBehaviour
 			transform.position = (transform.position + otherCubePosition) / 2;
 			rigidbodyComponent.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
 			Number++;
-			Score.AddScoreInvoke(kit[Number].Number);
-			if (Number == kit.Lenght - 1) GameState.WinInvoke();
+			if (number < kit.Lenght) Score.AddScoreInvoke(kit[Number].Number);
+			else Score.AddScoreInvoke((int)Mathf.Pow(2, number + 1));
+			if (Number == winNumber) GameState.WinInvoke();
 		}
 	}
 
 	public void UpdateVisuals()
 	{
-		materialComponent.color = kit[number].Color;
-		foreach (var t in texts)
+		if (number < kit.Lenght)
 		{
-			t.text = $"{kit[number].Number}";
+			materialComponent.color = kit[number].Color;
+			foreach (var t in texts)
+			{
+				t.text = $"{kit[number].Number}";
+			}
+		}
+		else
+		{
+			materialComponent.color = kit[kit.Lenght - 1].Color;
+			foreach (var t in texts)
+			{
+				t.text = $"{(int)Mathf.Pow(2, number + 1)}";
+			}
 		}
 	}
 }

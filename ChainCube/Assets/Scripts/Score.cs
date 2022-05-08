@@ -8,27 +8,36 @@ public class Score : MonoBehaviour
 {
 	#region Properties
 
+	[Header("Properties")]
 	[SerializeField] private static int currentScore;
-	[SerializeField] private AnimationCurve chanceOfCube;
-	[SerializeField] private Camera mainCamera;
 	[SerializeField] private bool isPlaying;
-	[SerializeField] private GameObject cubePrefab;
-	[SerializeField] private float maxThrowPositionDelta;
+	//[SerializeField] private float maxThrowPositionDelta;
 	[SerializeField] [Range(0, 1000)] private float throwingForce;
+	[SerializeField] private AnimationCurve chanceOfCube;
+	//[SerializeField] [Min(1)] private int amountOfThrowsForAd;
+	[Header("Components")]
+	[SerializeField] private Camera mainCamera;
+	[SerializeField] private GameObject cubePrefab;
 	[SerializeField] private TextMeshProUGUI scoreText;
+	//[SerializeField] private AdMob adMob;
 
 	private Controls input;
 	private bool isGrabbing;
 	private GameObject currentCube;
 	private Rigidbody currentRigitbody;
 	private bool isPaused = true;
+	[SerializeField] private int throwsAmount;
 
 	private static event Action<int> addScore;
 
 	public int CurrentScore
 	{
 		get => currentScore;
-		private set { currentScore = value; scoreText.text = $"{Localisation.CurrentLocalisation[3]}{currentScore}"; }
+		private set 
+		{ 
+			currentScore = value; 
+			scoreText.text = $"{Localisation.CurrentLocalisation[(int)Phrase.Score]}{currentScore}";
+		}
 	}
 
 	#endregion
@@ -47,6 +56,8 @@ public class Score : MonoBehaviour
 
 		GameState.GameOverSubscribe(GameOver);
 		GameState.StartGameSubscribe(StartPlay);
+
+		throwsAmount = 0;
 	}
 
 	private void OnEnable()
@@ -92,6 +103,12 @@ public class Score : MonoBehaviour
 			isGrabbing = false;
 			currentRigitbody.constraints = RigidbodyConstraints.None;
 			currentRigitbody.AddForce(Vector3.forward * throwingForce, ForceMode.VelocityChange);
+			/*throwsAmount++;
+			if (throwsAmount >= amountOfThrowsForAd)
+			{
+				adMob.ShowAd();
+				throwsAmount = 0;
+			}*/
 		}
 	}
 
@@ -122,10 +139,12 @@ public class Score : MonoBehaviour
 	private void GameOver()
 	{
 		isPlaying = false;
+		SaveRecord();
 	}
 
 	public void StartPlay()
 	{
+		SaveRecord();
 		isPlaying = true;
 		isPaused = false;
 		CurrentScore = 0;
@@ -152,6 +171,12 @@ public class Score : MonoBehaviour
 			input.Gameplay.Disable();
 			isPaused = true;
 		}
+	}
+
+	private void SaveRecord()
+	{
+		if (!PlayerPrefs.HasKey("ChainCuberecord")) PlayerPrefs.SetInt("ChainCuberecord", 0);
+		if (PlayerPrefs.GetInt("ChainCuberecord") < currentScore) PlayerPrefs.SetInt("ChainCuberecord", currentScore);
 	}
 
 	#region Trigger

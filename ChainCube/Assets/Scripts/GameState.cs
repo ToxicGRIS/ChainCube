@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameState : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameState : MonoBehaviour
 	[SerializeField] private GameObject PauseScreen;
 	[SerializeField] private Score score;
 	[SerializeField] private GameObject gameOverText;
+	[SerializeField] private TextMeshProUGUI recordText;
 
 	private static event Action win;
 	private static event Action gameOver;
@@ -80,6 +82,8 @@ public class GameState : MonoBehaviour
 	{
 		input.Menu.Pause.performed += e => SwitchPause();
 		GameOverSubscribe(GameOver);
+		WinSubscribe(GameOver);
+		recordText.text = Localisation.CurrentLocalisation[(int)Phrase.Record] + PlayerPrefs.GetInt("ChainCuberecord");
 	}
 
 	private void OnEnable()
@@ -135,12 +139,21 @@ public class GameState : MonoBehaviour
 			}
 			score.SwitchPause();
 		}
+		recordText.text = Localisation.CurrentLocalisation[(int)Phrase.Record] + PlayerPrefs.GetInt("ChainCuberecord");
 	}
 
 	public void GameOver()
 	{
+		recordText.text = Localisation.CurrentLocalisation[(int)Phrase.Record] + PlayerPrefs.GetInt("ChainCuberecord");
 		SwitchPause();
 		isOver = true;
 		gameOverText.SetActive(true);
+	}
+
+	[ContextMenu("Clear record")]
+	public void ClearRecord()
+	{
+		PlayerPrefs.SetInt("ChainCuberecord", 0);
+		recordText.text = Localisation.CurrentLocalisation[(int)Phrase.Record] + PlayerPrefs.GetInt("ChainCuberecord");
 	}
 }

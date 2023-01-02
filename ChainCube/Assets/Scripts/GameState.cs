@@ -8,8 +8,8 @@ public class GameState : MonoBehaviour
 {
 	#region Properties
 
-	[SerializeField] private GameObject GameScreen;
-	[SerializeField] private GameObject PauseScreen;
+	[SerializeField] private GameObject gameScreen;
+	[SerializeField] private GameObject pauseScreen;
 	[SerializeField] private Score score;
 	[SerializeField] private GameObject gameOverText;
 	[SerializeField] private TextMeshProUGUI recordText;
@@ -106,8 +106,8 @@ public class GameState : MonoBehaviour
 			SwitchPause();
 		else
 		{
-			PauseScreen.SetActive(false);
-			GameScreen.SetActive(true);
+			pauseScreen.SetActive(false);
+			gameScreen.SetActive(true);
 		}
 	}
 
@@ -116,8 +116,8 @@ public class GameState : MonoBehaviour
 		StartGameInvoke();
 		isPaused = false;
 		isOver = false;
-		PauseScreen.SetActive(false);
-		GameScreen.SetActive(true);
+		pauseScreen.SetActive(false);
+		gameScreen.SetActive(true);
 		gameOverText.SetActive(false);
 	}
 
@@ -127,14 +127,14 @@ public class GameState : MonoBehaviour
 		{
 			if (isPaused)
 			{
-				PauseScreen.SetActive(false);
-				GameScreen.SetActive(true);
+				pauseScreen.SetActive(false);
+				gameScreen.SetActive(true);
 				isPaused = false;
 			}
 			else
 			{
-				PauseScreen.SetActive(true);
-				GameScreen.SetActive(false);
+				pauseScreen.SetActive(true);
+				gameScreen.SetActive(false);
 				isPaused = true;
 			}
 			score.SwitchPause();

@@ -2725,8 +2725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77652342d745094e8d07a0af82289da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameScreen: {fileID: 615942657}
-  PauseScreen: {fileID: 1135914041}
+  gameScreen: {fileID: 615942657}
+  pauseScreen: {fileID: 1135914041}
   score: {fileID: 1905964161}
   gameOverText: {fileID: 1526667816}
   recordText: {fileID: 2060865274}

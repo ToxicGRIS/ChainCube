@@ -47,9 +47,9 @@ public class Cube : MonoBehaviour
 		UpdateVisuals();
 	}
 
-	#endregion
+    #endregion
 
-	private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
 	{
 		Cube other = collision.gameObject.GetComponent<Cube>();
 		if (other?.Number == Number && colliderComponent.enabled)
